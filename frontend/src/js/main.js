@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initNavbar();
   initSmoothScroll();
   initBackToTop();
-  initAOS();
+  initAnimateOnScroll();
   initCounterAnimation();
   initParticles();
   initFormHandlers();
@@ -164,8 +164,8 @@ function initBackToTop() {
   });
 }
 
-/* ===== AOS (Animate On Scroll) ===== */
-function initAOS() {
+/* ===== ANIMATE ON SCROLL ===== */
+function initAnimateOnScroll() {
   if (typeof AOS !== "undefined") {
     AOS.init({
       duration: 800,
@@ -496,9 +496,9 @@ function initTestimonialSlider() {
   slider.addEventListener("mousemove", (e) => {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2;
-    slider.scrollLeft = scrollLeft - walk;
+    const currentMouseX = e.pageX - slider.offsetLeft;
+    const dragDistance = (currentMouseX - startX) * 2;
+    slider.scrollLeft = scrollLeft - dragDistance;
   });
 }
 
