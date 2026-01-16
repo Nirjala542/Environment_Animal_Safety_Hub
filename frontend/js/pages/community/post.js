@@ -32,7 +32,10 @@ function loadPost(count = 3) {
     postCard.innerHTML = `
       <div class="post-header">
         <img src="${post.avatar}" alt="${post.username}">
-        <span class="username">${post.username}</span>
+        <div class="post-user-info">
+          <span class="username">${post.username}</span>
+          ${post.lastUpdated ? `<span class="post-timestamp"><i class="fa-regular fa-clock"></i> Last updated: ${post.lastUpdated}</span>` : ''}
+        </div>
       </div>
 
       <div class="post-image">
@@ -80,7 +83,7 @@ function loadPost(count = 3) {
     // Like
     likeBtn.addEventListener("click", () => {
       likeBtn.classList.toggle("active");
-      likeBtn.classList.contains("active") 
+      likeBtn.classList.contains("active")
         ? likeBtn.classList.replace("fa-regular", "fa-solid")
         : likeBtn.classList.replace("fa-solid", "fa-regular");
 
@@ -106,7 +109,7 @@ function loadPost(count = 3) {
     // Add comment
     addCommentBtn.addEventListener("click", () => {
       const text = commentInput.value.trim();
-      if(text !== "") {
+      if (text !== "") {
         const commentEl = document.createElement("div");
         commentEl.classList.add("comment-item");
         commentEl.textContent = text;
@@ -156,7 +159,7 @@ closeModal.addEventListener("click", () => {
 });
 
 window.addEventListener("click", (e) => {
-  if(e.target === modal){
+  if (e.target === modal) {
     modal.style.display = "none";
   }
 });
@@ -166,7 +169,7 @@ submitPostBtn.addEventListener("click", () => {
   const desc = postDescInput.value.trim();
   const imageFile = postImageInput.files[0];
 
-  if(!desc && !imageFile) return alert("Add description or image");
+  if (!desc && !imageFile) return alert("Add description or image");
 
   const postCard = document.createElement("div");
   postCard.className = "post-card";
@@ -210,7 +213,7 @@ submitPostBtn.addEventListener("click", () => {
 });
 
 // Function to attach likes/comments/save listeners
-function attachPostListeners(postCard){
+function attachPostListeners(postCard) {
   const likeBtn = postCard.querySelector(".like-btn");
   const saveBtn = postCard.querySelector(".save-btn");
   const commentBtn = postCard.querySelector(".comment-btn");
@@ -246,7 +249,7 @@ function attachPostListeners(postCard){
   // Add comment
   addCommentBtn.addEventListener("click", () => {
     const text = commentInput.value.trim();
-    if(text !== ""){
+    if (text !== "") {
       const commentEl = document.createElement("div");
       commentEl.classList.add("comment-item");
       commentEl.textContent = text;
